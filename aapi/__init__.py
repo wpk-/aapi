@@ -1,5 +1,5 @@
 """
-appi.
+aapi.
 
 Een typed interface voor de data API van de Gemeente Amsterdam.
 """

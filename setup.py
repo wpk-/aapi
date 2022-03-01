@@ -1,17 +1,28 @@
+import os
+
 from setuptools import setup
+
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 setup(
     name='aapi',
     version='0.1.0',
     description='Een typed interface voor de data API van de Gemeente'
                 ' Amsterdam.',
+    long_description=read('README.md'),
     url='https://github.com/wpk-/aapi',
     author='Paul Koppen',
     author_email='p.koppen@amsterdam.nl',
     keywords=['api', 'amsterdam'],
     license='MIT',
     packages=['aapi'],
-    install_requires='requirements.txt',
+    install_requires=[
+        'orjson',
+        'requests',
+    ],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
