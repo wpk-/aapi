@@ -1,3 +1,8 @@
+"""
+appi.
+
+Een typed interface voor de data API van de Gemeente Amsterdam.
+"""
 import logging
 from typing import Any, Generic, Iterator, Optional, Type
 from urllib.parse import urlencode
@@ -13,9 +18,12 @@ from aapi.models import (
     Winkelgebied,
 )
 
+__version__ = '0.1.0'
+__author__ = 'Paul Koppen'
+__credits__ = 'Gemeente Amsterdam'
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-
 
 DEFAULT_HEADERS = {
     'User-Agent': 'Mozilla/5.0 AppleWebKit/537.36'
