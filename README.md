@@ -15,6 +15,7 @@ pip install -r requirements.txt
 ## Gebruik
 
 ```python
+
 from aapi import API
 
 api = API()
