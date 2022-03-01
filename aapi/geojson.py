@@ -48,7 +48,12 @@ def parse_feature(feature: JSON, model: Type[Model],
         elif typ == Polygon:
             return [coord(xy) for xy in val]
         elif typ == Multipolygon:
-            return [[coord(xy) for xy in poly] for poly in val]
+            try:
+                return [[coord(xy) for xy in poly] for poly in val]
+            except ValueError:
+                # Workaround bug in API data.
+                assert all(len(poly) == 1 for poly in val)
+                return [[coord(xy) for xy in poly[0]] for poly in val]
 
         return val
 
