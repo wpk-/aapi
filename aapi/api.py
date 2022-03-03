@@ -111,6 +111,21 @@ class Endpoint(Generic[Model]):
             for feature in json['features']:
                 yield parse_feature(feature, model, geom_field)
 
+    def count(self, **params) -> int:
+        params['_count'] = 'true'
+        params['_format'] = 'json'  # geojson heeft geen count.
+        params['_pageSize'] = '1'
+        url = f'{self.url}?{urlencode(params)}'
+        session = self.session
+
+        logger.info(url)
+
+        with session.get(url) as res:
+            res.raise_for_status()
+            json = orjson.loads(res.content)
+
+        return json['page']['totalElements']
+
     def one(self, id: Any) -> Model:
         """Fetches a single record from the endpoint.
 
@@ -129,7 +144,7 @@ class Endpoint(Generic[Model]):
             res.raise_for_status()
             json = orjson.loads(res.content)
 
-            if 'crs' in json:
-                logger.debug(json['crs'])
+        if 'crs' in json:
+            logger.debug(json['crs'])
 
-            return parse_feature(json, model, geom_field)
+        return parse_feature(json, model, geom_field)

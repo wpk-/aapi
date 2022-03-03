@@ -28,3 +28,6 @@ if __name__ == '__main__':
     b = next(api.buurten())
     print(b)
     assert api.buurten.one(b.id) == b
+
+    nc = api.afval_containers.count(fractieOmschrijving='Rest')
+    print(f'Aantal containers voor restafval: {nc}')
