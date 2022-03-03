@@ -182,6 +182,50 @@ class Afvalweging(NamedTuple):
     bagNummeraanduidingId: str              # "0363200000368382"
 
 
+class Buurt(NamedTuple):
+    registratiedatum: datetime              # "2021-05-27T13:15:21"
+    naam: str                               # "Dichtersbuurt Weesp"
+    code: str                               # "SAC1"
+    beginGeldigheid: datetime               # "2021-04-07T00:00:00"
+    eindGeldigheid: datetime                # null
+    documentdatum: date                     # "2021-05-01"
+    documentnummer: str                     # "Tijdelijk besluit Weesp 2021"
+    cbsCode: str                            # "BU04570201"
+    ligtInWijkId: str                       # "03630970000002"
+    ligtInGgpgebiedId: str                  # null
+    ligtInGgwgebiedId: str                  # null
+    geometrie: Multipolygon                 # {...}
+    id: str                                 # "03630980000006.1"
+
+
+class Stadsdeel(NamedTuple):
+    registratiedatum: datetime              # "2021-05-27T13:15:21"
+    naam: str                               # "Weesp"
+    code: str                               # "S"
+    beginGeldigheid: datetime               # "2021-04-07T00:00:00"
+    eindGeldigheid: datetime                # null
+    documentdatum: date                     # "2021-05-01"
+    documentnummer: str                     # "Tijdelijk besluit Weesp 2021"
+    ligtInGemeenteId: str                   # "0363"
+    geometrie: Multipolygon                 # {...}
+    id: str                                 # "03630930000000.1"
+
+
+class Wijk(NamedTuple):
+    registratiedatum: datetime              # "2021-05-27T13:15:21"
+    naam: str                               # "Oostelijke Vechtoever"
+    code: str                               # "SAG"
+    beginGeldigheid: datetime               # "2021-04-07T00:00:00"
+    eindGeldigheid: datetime                # null
+    documentdatum: date                     # "2021-05-01"
+    documentnummer: str                     # "Tijdelijk besluit Weesp 2021"
+    cbsCode: str                            # "WK045708"
+    ligtInStadsdeelId: str                  # "03630930000000"
+    ligtInGgwgebiedId: str                  # null
+    geometrie: Multipolygon                 # {...}
+    id: str                                 # "03630970000006.1
+
+
 class Winkelgebied(NamedTuple):
     id: int                                 # 1
     geometry: Multipolygon                  # {...}
@@ -202,5 +246,5 @@ Model = TypeVar(
     'Model',
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
     Afvalcontainerlocatie, Afvalcontainertype, Afvalweging,
-    Winkelgebied,
+    Buurt, Stadsdeel, Wijk, Winkelgebied,
 )

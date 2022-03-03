@@ -24,3 +24,7 @@ if __name__ == '__main__':
     except HTTPError as err:
         print('Container niet gevonden.')
         print(err)
+
+    b = next(api.buurten())
+    print(b)
+    assert api.buurten.one(b.id) == b

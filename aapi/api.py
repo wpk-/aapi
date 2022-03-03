@@ -10,7 +10,7 @@ from aapi.models import (
     Point, Polygon, Multipolygon, Model,
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
     Afvalcontainerlocatie, Afvalcontainertype, Afvalweging,
-    Winkelgebied,
+    Winkelgebied, Buurt, Stadsdeel, Wijk,
 )
 
 logger = logging.getLogger(__name__)
@@ -52,6 +52,10 @@ class API:
         self.afval_wegingen = Endpoint(
             f'{root}/huishoudelijkafval/weging/', Afvalweging, session)
 
+        self.buurten = Endpoint(f'{root}/gebieden/buurten/', Buurt, session)
+        self.stadsdelen = Endpoint(
+            f'{root}/gebieden/stadsdelen/', Stadsdeel, session)
+        self.wijken = Endpoint(f'{root}/gebieden/wijken/', Wijk, session)
         self.winkelgebieden = Endpoint(
             f'{root}/winkelgebieden/winkelgebieden/', Winkelgebied, session)
 
@@ -72,6 +76,11 @@ class Endpoint(Generic[Model]):
         self.item_geometry_field = next(
             (f for f, t in item_type.__annotations__.items()
              if t in (Point, Polygon, Multipolygon)), None)
+
+    def __call__(self, **params) -> Iterator[Model]:
+        """Convenient shorthand for `.all(...)`.
+        """
+        return self.all(**params)
 
     def all(self, **params) -> Iterator[Model]:
         """Iterates over all records in the endpoint.
