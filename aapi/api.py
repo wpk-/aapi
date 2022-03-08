@@ -37,60 +37,60 @@ class API:
         # Huishoudelijk afval
         # -------------------
         self.afval_bijplaatsingen = endpoint(
-            f'{root}/huishoudelijkafval/bijplaatsingen/',
+            '/huishoudelijkafval/bijplaatsingen/',
             Afvalbijplaatsing
         )
         self.afval_clusters = endpoint(
-            f'{root}/huishoudelijkafval/cluster/',
+            '/huishoudelijkafval/cluster/',
             Afvalcluster
         )
         self.afval_clusterfracties = endpoint(
-            f'{root}/huishoudelijkafval/clusterfractie/',
+            '/huishoudelijkafval/clusterfractie/',
             Afvalclusterfractie
         )
         self.afval_containerlocaties = endpoint(
-            f'{root}/huishoudelijkafval/containerlocatie/',
+            '/huishoudelijkafval/containerlocatie/',
             Afvalcontainerlocatie
         )
         self.afval_containers = endpoint(
-            f'{root}/huishoudelijkafval/container/',
+            '/huishoudelijkafval/container/',
             Afvalcontainer
         )
         self.afval_containerlocaties = endpoint(
-            f'{root}/huishoudelijkafval/containertype/',
+            '/huishoudelijkafval/containertype/',
             Afvalcontainertype
         )
         self.afval_wegingen = endpoint(
-            f'{root}/huishoudelijkafval/weging/',
+            '/huishoudelijkafval/weging/',
             Afvalweging
         )
 
         # Meldingen
         # ---------
         self.meldingen = endpoint(
-            f'{root}/meldingen/meldingen/',
+            '/meldingen/meldingen/',
             MeldingOpenbareRuimte
         )
 
         # Gebieden
         # --------
         self.buurten = endpoint(
-            f'{root}/gebieden/buurten/',
+            '/gebieden/buurten/',
             Buurt
         )
         self.stadsdelen = endpoint(
-            f'{root}/gebieden/stadsdelen/',
+            '/gebieden/stadsdelen/',
             Stadsdeel
         )
         self.wijken = endpoint(
-            f'{root}/gebieden/wijken/',
+            '/gebieden/wijken/',
             Wijk
         )
 
         # Winkelgebieden
         # --------------
         self.winkelgebieden = endpoint(
-            f'{root}/winkelgebieden/winkelgebieden/',
+            '/winkelgebieden/winkelgebieden/',
             Winkelgebied
         )
 
