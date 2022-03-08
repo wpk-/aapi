@@ -198,6 +198,31 @@ class Buurt(NamedTuple):
     id: str                                 # "03630980000006.1"
 
 
+class MeldingOpenbareRuimte(NamedTuple):
+    id: str                                 # "SIA-1000"
+    hoofdcategorie: str                     # "Wegen, verkeer, straatmeubilair"
+    subcategorie: str                       # "Prullenbak is kapot"
+    datumMelding: date                      # "2018-08-09"
+    tijdstipMelding: time                   # "09:52:36"
+    datumOverlast: date                     # "2018-08-09"
+    tijdstipOverlast: time                  # "09:52:36"
+    meldingType: str                        # "SIG"
+    meldingSoort: str                       # "standaard"
+    meldingsnummerBovenliggend: str         # "SIA-999894"
+    gbdBuurtCode: str                       # "A04g"
+    gbdBuurtNaam: str                       # "Valkenburg"
+    gbdWijkCode: str                        # "A04"
+    gbdWijkNaam: str                        # "Nieuwmarkt/Lastage"
+    gbdGgwgebiedCode: str                   # "DX02"
+    gbdGgwgebiedNaam: str                   # "Centrum-Oost"
+    gbdStadsdeelCode: str                   # "A"
+    gbdStadsdeelNaam: str                   # "Centrum"
+    bagWoonplaatsNaam: str                  # "Amsterdam"
+    bagWoonplaatsId: str                    # "3594"
+    bron: str                               # "SIA"
+    laatstGezienBron: datetime              # "2022-03-07T04:21:37"
+
+
 class Stadsdeel(NamedTuple):
     registratiedatum: datetime              # "2021-05-27T13:15:21"
     naam: str                               # "Weesp"
@@ -246,5 +271,5 @@ Model = TypeVar(
     'Model',
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
     Afvalcontainerlocatie, Afvalcontainertype, Afvalweging,
-    Buurt, Stadsdeel, Wijk, Winkelgebied,
+    Buurt, MeldingOpenbareRuimte, Stadsdeel, Wijk, Winkelgebied,
 )

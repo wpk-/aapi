@@ -5,12 +5,12 @@ from urllib.parse import urlencode
 import orjson as orjson
 import requests as requests
 
-from aapi.geojson import parse_feature
+from aapi.geojson import model_parser
 from aapi.models import (
-    Point, Polygon, Multipolygon, Model,
+    Model,
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
     Afvalcontainerlocatie, Afvalcontainertype, Afvalweging,
-    Winkelgebied, Buurt, Stadsdeel, Wijk,
+    Buurt, MeldingOpenbareRuimte, Stadsdeel, Wijk, Winkelgebied
 )
 
 logger = logging.getLogger(__name__)
@@ -52,6 +52,9 @@ class API:
         self.afval_wegingen = Endpoint(
             f'{root}/huishoudelijkafval/weging/', Afvalweging, session)
 
+        self.meldingen = Endpoint(
+            f'{root}/meldingen/meldingen/', MeldingOpenbareRuimte, session)
+
         self.buurten = Endpoint(f'{root}/gebieden/buurten/', Buurt, session)
         self.stadsdelen = Endpoint(
             f'{root}/gebieden/stadsdelen/', Stadsdeel, session)
@@ -70,12 +73,8 @@ class Endpoint(Generic[Model]):
         :param session: The session to use for communication.
         """
         self.url = url
-        self.item_type = item_type
+        self.parse_feature = model_parser(item_type)
         self.session = session
-
-        self.item_geometry_field = next(
-            (f for f, t in item_type.__annotations__.items()
-             if t in (Point, Polygon, Multipolygon)), None)
 
     def __call__(self, **params) -> Iterator[Model]:
         """Convenient shorthand for `.all(...)`.
@@ -88,11 +87,11 @@ class Endpoint(Generic[Model]):
         :param params: Keyword arguments to refine your query.
         :return: Iterator over all records in the endpoint.
         """
+        session = self.session
+        parse_feature = self.parse_feature
+
         params['_format'] = 'geojson'
         url = f'{self.url}?{urlencode(params)}'
-        session = self.session
-        model = self.item_type
-        geom_field = self.item_geometry_field
 
         while url:
             logger.info(url)
@@ -109,7 +108,7 @@ class Endpoint(Generic[Model]):
                 logger.debug(json['crs'])
 
             for feature in json['features']:
-                yield parse_feature(feature, model, geom_field)
+                yield parse_feature(feature)
 
     def count(self, **params) -> int:
         params['_count'] = 'true'
@@ -126,17 +125,17 @@ class Endpoint(Generic[Model]):
 
         return json['page']['totalElements']
 
-    def one(self, id: Any) -> Model:
+    def one(self, id: Any, **params) -> Model:
         """Fetches a single record from the endpoint.
 
         :param id: The resource ID.
         :return: The resource.
         """
-        params = {'_format': 'geojson'}
-        url = f'{self.url}{id}/?{urlencode(params)}'
         session = self.session
-        model = self.item_type
-        geom_field = self.item_geometry_field
+        parse_feature = self.parse_feature
+
+        params['_format'] = 'geojson'
+        url = f'{self.url}{id}/?{urlencode(params)}'
 
         logger.info(url)
 
@@ -147,4 +146,4 @@ class Endpoint(Generic[Model]):
         if 'crs' in json:
             logger.debug(json['crs'])
 
-        return parse_feature(json, model, geom_field)
+        return parse_feature(json)

@@ -1,4 +1,5 @@
 import logging
+from datetime import date
 
 from aapi import API
 
@@ -31,3 +32,5 @@ if __name__ == '__main__':
 
     nc = api.afval_containers.count(fractieOmschrijving='Rest')
     print(f'Aantal containers voor restafval: {nc}')
+
+    assert api.meldingen.one('SIA-1000097').datumMelding == date(2021, 7, 27)
