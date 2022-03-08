@@ -218,7 +218,6 @@ class MeldingOpenbareRuimte(NamedTuple):
     gbdStadsdeelCode: str                   # "A"
     gbdStadsdeelNaam: str                   # "Centrum"
     bagWoonplaatsNaam: str                  # "Amsterdam"
-    bagWoonplaatsId: str                    # "3594"
     bron: str                               # "SIA"
     laatstGezienBron: datetime              # "2022-03-07T04:21:37"
 

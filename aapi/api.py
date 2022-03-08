@@ -1,5 +1,6 @@
 import logging
-from typing import Optional, Generic, Type, Iterator, Any
+from collections.abc import Iterator
+from typing import Any, Optional, Generic, Type
 from urllib.parse import urlencode
 
 import orjson as orjson
@@ -10,57 +11,88 @@ from aapi.models import (
     Model,
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
     Afvalcontainerlocatie, Afvalcontainertype, Afvalweging,
-    Buurt, MeldingOpenbareRuimte, Stadsdeel, Wijk, Winkelgebied
+    MeldingOpenbareRuimte, Buurt, Stadsdeel, Wijk, Winkelgebied
 )
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 DEFAULT_HEADERS = {
-    'User-Agent': 'Mozilla/5.0 AppleWebKit/537.36'
-                  ' Chrome/92.0 Safari/537.36',
+    'User-Agent': 'Mozilla/5.0 AppleWebKit/537.36 Chrome/92.0 Safari/537.36',
     'Accept-CRS': 'EPSG:28992',
 }
 
 
 class API:
     def __init__(self, headers: Optional[dict[str, str]] = None) -> None:
+        def endpoint(path: str, model: Type[Model]) -> Endpoint[Model]:
+            return Endpoint(f'{root}{path}', model, session)
+
         session = requests.Session()
-        if not headers:
-            headers = DEFAULT_HEADERS
-        session.headers.update(headers)
+        session.headers.update(headers or DEFAULT_HEADERS)
         self.session = session
 
         root = 'https://api.data.amsterdam.nl/v1'
 
-        self.afval_bijplaatsingen = Endpoint(
+        # Huishoudelijk afval
+        # -------------------
+        self.afval_bijplaatsingen = endpoint(
             f'{root}/huishoudelijkafval/bijplaatsingen/',
-            Afvalbijplaatsing, session)
-        self.afval_clusters = Endpoint(
-            f'{root}/huishoudelijkafval/cluster/', Afvalcluster, session)
-        self.afval_clusterfracties = Endpoint(
+            Afvalbijplaatsing
+        )
+        self.afval_clusters = endpoint(
+            f'{root}/huishoudelijkafval/cluster/',
+            Afvalcluster
+        )
+        self.afval_clusterfracties = endpoint(
             f'{root}/huishoudelijkafval/clusterfractie/',
-            Afvalclusterfractie, session)
-        self.afval_containerlocaties = Endpoint(
+            Afvalclusterfractie
+        )
+        self.afval_containerlocaties = endpoint(
             f'{root}/huishoudelijkafval/containerlocatie/',
-            Afvalcontainerlocatie, session)
-        self.afval_containers = Endpoint(
-            f'{root}/huishoudelijkafval/container/', Afvalcontainer, session)
-        self.afval_containerlocaties = Endpoint(
+            Afvalcontainerlocatie
+        )
+        self.afval_containers = endpoint(
+            f'{root}/huishoudelijkafval/container/',
+            Afvalcontainer
+        )
+        self.afval_containerlocaties = endpoint(
             f'{root}/huishoudelijkafval/containertype/',
-            Afvalcontainertype, session)
-        self.afval_wegingen = Endpoint(
-            f'{root}/huishoudelijkafval/weging/', Afvalweging, session)
+            Afvalcontainertype
+        )
+        self.afval_wegingen = endpoint(
+            f'{root}/huishoudelijkafval/weging/',
+            Afvalweging
+        )
 
-        self.meldingen = Endpoint(
-            f'{root}/meldingen/meldingen/', MeldingOpenbareRuimte, session)
+        # Meldingen
+        # ---------
+        self.meldingen = endpoint(
+            f'{root}/meldingen/meldingen/',
+            MeldingOpenbareRuimte
+        )
 
-        self.buurten = Endpoint(f'{root}/gebieden/buurten/', Buurt, session)
-        self.stadsdelen = Endpoint(
-            f'{root}/gebieden/stadsdelen/', Stadsdeel, session)
-        self.wijken = Endpoint(f'{root}/gebieden/wijken/', Wijk, session)
-        self.winkelgebieden = Endpoint(
-            f'{root}/winkelgebieden/winkelgebieden/', Winkelgebied, session)
+        # Gebieden
+        # --------
+        self.buurten = endpoint(
+            f'{root}/gebieden/buurten/',
+            Buurt
+        )
+        self.stadsdelen = endpoint(
+            f'{root}/gebieden/stadsdelen/',
+            Stadsdeel
+        )
+        self.wijken = endpoint(
+            f'{root}/gebieden/wijken/',
+            Wijk
+        )
+
+        # Winkelgebieden
+        # --------------
+        self.winkelgebieden = endpoint(
+            f'{root}/winkelgebieden/winkelgebieden/',
+            Winkelgebied
+        )
 
 
 class Endpoint(Generic[Model]):
@@ -111,6 +143,11 @@ class Endpoint(Generic[Model]):
                 yield parse_feature(feature)
 
     def count(self, **params) -> int:
+        """Returns the number of records that match the query.
+
+        :param params: Keyword arguments to refine the query.
+        :return: The total number of matching records.
+        """
         params['_count'] = 'true'
         params['_format'] = 'json'  # geojson heeft geen count.
         params['_pageSize'] = '1'
