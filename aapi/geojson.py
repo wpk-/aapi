@@ -78,8 +78,8 @@ def model_parser(model: Type[Model], geometry_field: Optional[str] = None
         props = feature['properties']
         if geometry_field and 'geometry' in feature:
             props[geometry_field] = feature['geometry']
-        return model(**{fld: parser(props[fld])
-                        if props.get(fld, None) else None
+        return model(**{fld: None if props.get(fld, None) is None
+                        else parser(props[fld])
                         for fld, parser in field_methods})
 
     type_methods = {
