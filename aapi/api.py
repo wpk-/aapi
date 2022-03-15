@@ -56,7 +56,7 @@ class API:
             '/huishoudelijkafval/container/',
             Afvalcontainer
         )
-        self.afval_containerlocaties = endpoint(
+        self.afval_containertypes = endpoint(
             '/huishoudelijkafval/containertype/',
             Afvalcontainertype
         )
