@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name='aapi',
-    version='0.1.1',
+    version='0.2.1',
     description='Een typed interface voor de data API van de Gemeente'
                 ' Amsterdam.',
     long_description=read('README.md'),

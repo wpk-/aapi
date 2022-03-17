@@ -23,14 +23,18 @@ DEFAULT_HEADERS = {
 }
 
 
+def make_session(headers: Optional[dict[str, str]] = None) -> requests.Session:
+    session = requests.Session()
+    session.headers.update(headers or DEFAULT_HEADERS)
+    return session
+
+
 class API:
-    def __init__(self, headers: Optional[dict[str, str]] = None) -> None:
+    def __init__(self, session: Optional[requests.Session] = None) -> None:
         def endpoint(path: str, model: Type[Model]) -> Endpoint[Model]:
             return Endpoint(f'{root}{path}', model, session)
 
-        session = requests.Session()
-        session.headers.update(headers or DEFAULT_HEADERS)
-        self.session = session
+        self.session = session = session or make_session()
 
         root = 'https://api.data.amsterdam.nl/v1'
 
