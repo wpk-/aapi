@@ -34,3 +34,7 @@ if __name__ == '__main__':
     print(f'Aantal containers voor restafval: {nc}')
 
     assert api.meldingen.one('SIA-1000097').datumMelding == date(2021, 7, 27)
+
+    av = api.afval_vulgraad_sidcon.all(page_size=1)
+    print(next(av))
+    print(next(av))

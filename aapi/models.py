@@ -156,6 +156,14 @@ class Afvalcontainertype(NamedTuple):
     containertypeCompressiefactor: str      # "2.50"
 
 
+class AfvalvulgraadSidcon(NamedTuple):
+    filling: int                            # 6
+    communication_date_time: datetime       # 2022-03-17T15:19:04.960000Z
+    # id: int                                 # 11026789
+    container_id: str                       # "REA00252"
+    short_id: str                           # null
+
+
 class Afvalweging(NamedTuple):
     id: str                                 # "10000~2017-02-17~09:12:03~26"
     clusterId: str                          # "128920.051|484940.826"
@@ -263,6 +271,6 @@ class Winkelgebied(NamedTuple):
 Model = TypeVar(
     'Model',
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
-    Afvalcontainerlocatie, Afvalcontainertype, Afvalweging,
-    Buurt, MeldingOpenbareRuimte, Stadsdeel, Wijk, Winkelgebied,
+    Afvalcontainerlocatie, Afvalcontainertype, AfvalvulgraadSidcon,
+    Afvalweging, Buurt, MeldingOpenbareRuimte, Stadsdeel, Wijk, Winkelgebied,
 )
