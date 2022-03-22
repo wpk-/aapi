@@ -62,6 +62,7 @@ def from_field(fld: str, constructor: Callable[..., Geom]
 type_methods = {
     date: date.fromisoformat,
     datetime: datetime.fromisoformat,
+    int: int,
     time: time.fromisoformat,
     Point: from_field('coordinates', parse_point),
     Polygon: from_field('coordinates', parse_polygon),
