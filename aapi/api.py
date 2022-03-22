@@ -114,6 +114,7 @@ class Endpoint(Generic[Model]):
         :param session: The session to use for communication.
         """
         self.url = url
+        self.model = item_type
         self.parse_feature = model_parser(item_type)
         self.session = session
 
