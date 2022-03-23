@@ -159,7 +159,7 @@ class Afvalcontainertype(NamedTuple):
 class AfvalvulgraadSidcon(NamedTuple):
     filling: int                            # 6
     communication_date_time: datetime       # 2022-03-17T15:19:04.960000Z
-    # id: int                                 # 11026789
+    id: int                                 # 11026789
     container_id: str                       # "REA00252"
     short_id: str                           # null
 
