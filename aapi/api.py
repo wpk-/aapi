@@ -10,8 +10,9 @@ from aapi.geojson import model_parser, model_parser_v0
 from aapi.models import (
     Model,
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
-    Afvalcontainerlocatie, Afvalcontainertype, AfvalvulgraadSidcon,
-    Afvalweging, MeldingOpenbareRuimte, Buurt, Stadsdeel, Wijk, Winkelgebied,
+    Afvalcontainerlocatie, Afvalcontainertype, AfvalLoopafstandAdres,
+    AfvalLoopafstandBag, AfvalvulgraadSidcon, Afvalweging,
+    MeldingOpenbareRuimte, Buurt, Stadsdeel, Wijk, Winkelgebied,
 )
 
 logger = logging.getLogger(__name__)
@@ -72,6 +73,16 @@ class API:
         self.afval_wegingen = endpoint(
             '/huishoudelijkafval/weging/',
             Afvalweging
+        )
+
+        # Loopafstanden
+        self.afval_loopafstanden_adres = endpoint(
+            '/huishoudelijkafval/adres_loopafstand/',
+            AfvalLoopafstandAdres
+        )
+        self.afval_loopafstanden_bag = endpoint(
+            '/huishoudelijkafval/bag_object_loopafstand/',
+            AfvalLoopafstandBag
         )
 
         # Meldingen

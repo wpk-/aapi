@@ -156,6 +156,36 @@ class Afvalcontainertype(NamedTuple):
     containertypeCompressiefactor: str      # "2.50"
 
 
+class AfvalLoopafstandAdres(NamedTuple):
+    id: str                                 # "0363010000543293~036...06111~1"
+    adresseerbaarobjectId: str              # "0363010000543293"
+    adresseerbaarobjectType: str            # "Verblijfsobject"
+    nummeraanduidingId: str                 # "0363200000006111"
+    gebruiksdoel: str                       # "woonfunctie"
+    clusterId: str                          # "120268.662|487891.656"
+    fractie: str                            # "1"
+    fractieOmschrijving: str                # "Rest"
+    loopafstandCategorieId: str             # "1~10"
+    loopafstand: float                      # 584.59
+    geometrie: Point                        # {...}
+    wijzigingsdatumDp: datetime             # "2021-08-14T19:24:44.989071"
+    verwijderdDp: bool                      # false
+
+
+class AfvalLoopafstandBag(NamedTuple):
+    id: str                                 # "0363020000676358~5"
+    bagObjectId: str                        # "0363020000676358"
+    bagObjectType: str                      # "ligplaats"
+    clusterId: str                          # "118811.815|484374.131"
+    fractie: str                            # "5"
+    fractieOmschrijving: str                # "Textiel"
+    loopafstandCategorieId: str             # "5~10"
+    loopafstand: float                      # 1315.43
+    geometrie: Multipolygon                 # {...}
+    wijzigingsdatumDp: datetime             # "2021-03-13T19:33:23.809982"
+    verwijderdDp: bool                      # false
+
+
 class AfvalvulgraadSidcon(NamedTuple):
     filling: int                            # 6
     communication_date_time: datetime       # 2022-03-17T15:19:04.960000Z
@@ -271,6 +301,7 @@ class Winkelgebied(NamedTuple):
 Model = TypeVar(
     'Model',
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
-    Afvalcontainerlocatie, Afvalcontainertype, AfvalvulgraadSidcon,
-    Afvalweging, Buurt, MeldingOpenbareRuimte, Stadsdeel, Wijk, Winkelgebied,
+    Afvalcontainerlocatie, Afvalcontainertype, AfvalLoopafstandAdres,
+    AfvalLoopafstandBag, AfvalvulgraadSidcon, Afvalweging, Buurt,
+    MeldingOpenbareRuimte, Stadsdeel, Wijk, Winkelgebied,
 )

@@ -38,3 +38,7 @@ if __name__ == '__main__':
     av = api.afval_vulgraad_sidcon.all(page_size=1)
     print(next(av))
     print(next(av))
+
+    print(api.afval_loopafstanden_bag.one('0363020000676358~5'))
+    print(api.afval_loopafstanden_adres.count(
+        clusterId='123645.153|485465.699', fractieOmschrijving='Rest'))
