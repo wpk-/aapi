@@ -39,6 +39,8 @@ if __name__ == '__main__':
     print(next(av))
     print(next(av))
 
-    print(api.afval_loopafstanden_bag.one('0363020000676358~5'))
+    print(api.afval_loopafstanden_bag.one('0363020000676299~4'))
     print(api.afval_loopafstanden_adres.count(
         clusterId='123645.153|485465.699', fractieOmschrijving='Rest'))
+
+    print(api.meldingen_buurt.one(34054))

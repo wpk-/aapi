@@ -12,7 +12,8 @@ from aapi.models import (
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
     Afvalcontainerlocatie, Afvalcontainertype, AfvalLoopafstandAdres,
     AfvalLoopafstandBag, AfvalvulgraadSidcon, Afvalweging,
-    MeldingOpenbareRuimte, Buurt, Stadsdeel, Wijk, Winkelgebied,
+    MeldingMijnAmsterdam, MeldingOpenbareRuimte,
+    Buurt, Stadsdeel, Wijk, Winkelgebied,
 )
 
 logger = logging.getLogger(__name__)
@@ -90,6 +91,10 @@ class API:
         self.meldingen = endpoint(
             '/meldingen/meldingen/',
             MeldingOpenbareRuimte
+        )
+        self.meldingen_buurt = endpoint(
+            '/meldingen/meldingen_buurt/',
+            MeldingMijnAmsterdam
         )
 
         # Gebieden

@@ -233,6 +233,17 @@ class Buurt(NamedTuple):
     id: str                                 # "03630980000006.1"
 
 
+class MeldingMijnAmsterdam(NamedTuple):
+    id: int                                 # 34054
+    categorie: str                          # "overlast-bedrijven-en-horeca"
+    subcategorie: str                       # "overig-horecabedrijven"
+    status: str                             # "In behandeling"
+    datumCreatie: datetime                  # "2018-09-30T15:00:22.814031"
+    datumWijziging: datetime                # "2021-03-24T10:38:45.977122"
+    geometrie: Point                        # {}
+    geometrieVisualisatie: Point            # {}
+
+
 class MeldingOpenbareRuimte(NamedTuple):
     id: str                                 # "SIA-1000"
     hoofdcategorie: str                     # "Wegen, verkeer, straatmeubilair"
@@ -303,5 +314,5 @@ Model = TypeVar(
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
     Afvalcontainerlocatie, Afvalcontainertype, AfvalLoopafstandAdres,
     AfvalLoopafstandBag, AfvalvulgraadSidcon, Afvalweging, Buurt,
-    MeldingOpenbareRuimte, Stadsdeel, Wijk, Winkelgebied,
+    MeldingMijnAmsterdam, MeldingOpenbareRuimte, Stadsdeel, Wijk, Winkelgebied,
 )
