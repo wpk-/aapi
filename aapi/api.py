@@ -13,7 +13,7 @@ from aapi.models import (
     Afvalcontainerlocatie, Afvalcontainertype, AfvalLoopafstandAdres,
     AfvalLoopafstandBag, AfvalvulgraadSidcon, Afvalweging,
     MeldingMijnAmsterdam, MeldingOpenbareRuimte,
-    Buurt, Stadsdeel, Wijk, Winkelgebied,
+    Buurt, Stadsdeel, Wijk, Winkelgebied, OpenbareRuimte, Nummeraanduiding,
 )
 
 logger = logging.getLogger(__name__)
@@ -84,6 +84,16 @@ class API:
         self.afval_loopafstanden_bag = endpoint(
             '/huishoudelijkafval/bag_object_loopafstand/',
             AfvalLoopafstandBag
+        )
+
+        # BAG
+        self.nummeraanduidingen = endpoint(
+            '/bag/nummeraanduidingen/',
+            Nummeraanduiding
+        )
+        self.openbare_ruimtes = endpoint(
+            '/bag/openbareruimtes/',
+            OpenbareRuimte
         )
 
         # Meldingen

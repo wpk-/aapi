@@ -268,6 +268,57 @@ class MeldingOpenbareRuimte(NamedTuple):
     laatstGezienBron: datetime              # "2022-03-07T04:21:37"
 
 
+class Nummeraanduiding(NamedTuple):
+    registratiedatum: datetime              # "2010-10-26T06:19:08"
+    huisnummer: int                         # 20
+    geconstateerd: bool                     # false
+    huisletter: str                         # null
+    huisnummertoevoeging: str               # null
+    postcode: str                           # "1067TK"
+    ligtInWoonplaatsId: str                 # "3594"
+    beginGeldigheid: datetime               # "2006-01-03T00:00:00"
+    eindGeldigheid: datetime                # null
+    ligtAanOpenbareruimteId: str            # "0363300000004610"
+    typeAdresseerbaarObjectCode: int        # 1
+    typeAdresseerbaarObjectOmschrijving: str   # "Verblijfsobject"
+    documentdatum: date                     # "2006-01-03"
+    documentnummer: str                     # "GV00000403"
+    statusCode: int                         # 1
+    statusOmschrijving: str                 # "Naamgeving uitgegeven"
+    typeAdres: str                          # "Hoofdadres"
+    adresseertVerblijfsobjectId: str        # "0363010001036106"
+    adresseertLigplaatsId: str              # null
+    adresseertStandplaatsId: str            # null
+    heeftDossierId: str                     # "GV00000403"
+    bagprocesCode: int                      # 143
+    bagprocesOmschrijving: str              # "Splitsen verblijfsobject"
+    id: str                                 # "0363200000520747.3"
+
+
+class OpenbareRuimte(NamedTuple):
+    registratiedatum: datetime              # "2019-06-28T19:28:27"
+    straatcode: str                         # "31496"
+    straatnaamPtt: str                      # "RUBENSSTR"
+    statusCode: int                         # 1
+    statusOmschrijving: str                 # "Naamgeving uitgegeven"
+    beginGeldigheid: datetime               # "2014-01-10T00:00:00"
+    eindGeldigheid: datetime                # null
+    geconstateerd: bool                     # false
+    typeCode: int                           # 1
+    typeOmschrijving: str                   # "Weg"
+    documentdatum: date                     # "2014-01-10"
+    documentnummer: str                     # "GV00001729_AC00AC"
+    naam: str                               # "Rubensstraat"
+    naamNen: str                            # "Rubensstraat"
+    ligtInWoonplaatsId: str                 # "3594"
+    beschrijvingNaam: str                   # "Petrus Paulus Rubens ..."
+    heeftDossierId: str                     # "GV00001729"
+    bagprocesCode: int                      # 122
+    bagprocesOmschrijving: str              # "Benoemen openbare ruimte"
+    geometrie: Multipolygon                 # {"type": "MultiPolygon", ...}
+    id: str                                 # "0363300000004427.8"
+
+
 class Stadsdeel(NamedTuple):
     registratiedatum: datetime              # "2021-05-27T13:15:21"
     naam: str                               # "Weesp"
@@ -314,5 +365,6 @@ Model = TypeVar(
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
     Afvalcontainerlocatie, Afvalcontainertype, AfvalLoopafstandAdres,
     AfvalLoopafstandBag, AfvalvulgraadSidcon, Afvalweging, Buurt,
-    MeldingMijnAmsterdam, MeldingOpenbareRuimte, Stadsdeel, Wijk, Winkelgebied,
+    MeldingMijnAmsterdam, MeldingOpenbareRuimte, Nummeraanduiding,
+    OpenbareRuimte, Stadsdeel, Wijk, Winkelgebied,
 )
