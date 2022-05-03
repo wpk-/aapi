@@ -331,6 +331,50 @@ class Stadsdeel(NamedTuple):
     id: str                                 # "03630930000000.1"
 
 
+class Verblijfsobject(NamedTuple):
+    id: str                                 # "0363010000749418.9"
+    registratiedatum: datetime              # "2022-04-26T15:57:06"
+    cbsNummer: str                          # "302570"
+    indicatieWoningvoorraad: str            # "N"
+    financieringscodeCode: int              # 500
+    financieringscodeOmschrijving: str      # "Ongesubsidieerde bouw (500)"
+    geconstateerd: bool                     # false
+    heeftHoofdadresId: str                  # "0363200000210020"
+    geometrie: Point                        # {"type": "Point", ...}
+    oppervlakte: int                        # 70
+    statusCode: int                         # 7
+    statusOmschrijving: str                 # "Verbouwing verblijfsobject"
+    beginGeldigheid: datetime               # "2022-04-26T00:00:00"
+    eindGeldigheid: datetime                # "2047-08-03T00:00:00"
+    documentdatum: date                     # "2022-04-26"
+    documentnummer: str                     # "SA06302917"
+    gebruiksdoelWoonfunctieCode: int        # 2085
+    gebruiksdoelWoonfunctieOmschrijving: str                # "Complex, ..."
+    gebruiksdoelGezondheidszorgfunctieCode: int             # 2330
+    gebruiksdoelGezondheidszorgfunctieOmschrijving: str     # "Complex, ..."
+    aantalEenhedenComplex: int              # 4
+    verdiepingToegang: int                  # 3
+    aantalBouwlagen: int                    # 2
+    hoogsteBouwlaag: int                    # 4
+    laagsteBouwlaag: int                    # 3
+    aantalKamers: int                       # 5
+    eigendomsverhoudingCode: int            # 1
+    eigendomsverhoudingOmschrijving: str    # "Huur"
+    feitelijkGebruikCode: int               # 3113
+    feitelijkGebruikOmschrijving: str       # "toonzaal"
+    redenopvoerCode: int                    # 27
+    redenopvoerOmschrijving: str            # "Verbouw in vergunningsfase"
+    redenafvoerCode: int                    # 49
+    redenafvoerOmschrijving: str            # "Correctie afvoer"
+    ligtInBuurtId: str                      # "03630980000051"
+    heeftDossierId: str                     # "SA06302917"
+    bagprocesCode: int                      # 111
+    bagprocesOmschrijving: str              # "Kleine verbouwing object"
+    gebruiksdoel: str                       # [{"code": "5", "omschrijving": "industriefunctie"}, ...]
+    toegang: str                            # [{"code": "8", "omschrijving": "Begane grond"}, ...]
+    # @TODO: lijst van dicts als type.
+
+
 class Wijk(NamedTuple):
     registratiedatum: datetime              # "2021-05-27T13:15:21"
     naam: str                               # "Oostelijke Vechtoever"
@@ -366,5 +410,5 @@ Model = TypeVar(
     Afvalcontainerlocatie, Afvalcontainertype, AfvalLoopafstandAdres,
     AfvalLoopafstandBag, AfvalvulgraadSidcon, Afvalweging, Buurt,
     MeldingMijnAmsterdam, MeldingOpenbareRuimte, Nummeraanduiding,
-    OpenbareRuimte, Stadsdeel, Wijk, Winkelgebied,
+    OpenbareRuimte, Stadsdeel, Verblijfsobject, Wijk, Winkelgebied,
 )

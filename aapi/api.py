@@ -14,6 +14,7 @@ from aapi.models import (
     AfvalLoopafstandBag, AfvalvulgraadSidcon, Afvalweging,
     MeldingMijnAmsterdam, MeldingOpenbareRuimte,
     Buurt, Stadsdeel, Wijk, Winkelgebied, OpenbareRuimte, Nummeraanduiding,
+    Verblijfsobject,
 )
 
 logger = logging.getLogger(__name__)
@@ -94,6 +95,10 @@ class API:
         self.openbare_ruimtes = endpoint(
             '/bag/openbareruimtes/',
             OpenbareRuimte
+        )
+        self.verblijfsobjecten = endpoint(
+            '/bag/verblijfsobjecten/',
+            Verblijfsobject
         )
 
         # Meldingen
