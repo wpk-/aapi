@@ -1,8 +1,7 @@
-from collections.abc import Callable, Sequence
-from datetime import date, datetime, time
-from typing import Optional, Type, TypeVar
+from datetime import datetime, date, time
+from typing import TypeVar, Sequence, Callable, Type, Optional
 
-from aapi.models import JSON, Model, Multipolygon, Point, Polygon
+from aapi.models import Point, Polygon, Multipolygon, JSON, Model
 
 Geom = TypeVar('Geom', Point, Polygon, Multipolygon)
 T = TypeVar('T')
