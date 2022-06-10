@@ -48,3 +48,5 @@ if __name__ == '__main__':
     print(next(api.openbare_ruimtes.all(_pageSize=1)))
     print(next(api.nummeraanduidingen.all(_pageSize=1)))
     print(next(api.verblijfsobjecten.all(_pageSize=1)))
+    print(next(api.ligplaatsen.all(_pageSize=1)))
+    print(next(api.standplaatsen.all(_pageSize=1)))

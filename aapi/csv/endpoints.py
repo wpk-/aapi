@@ -3,13 +3,14 @@ from collections.abc import Callable, Sequence
 from aapi.csv.base import CsvEndpoint
 from aapi.models import (
     Model, Afvalbijplaatsing, Afvalcontainer,
-    Afvalcontainertype, AfvalLoopafstandAdres, Nummeraanduiding,
-    OpenbareRuimte, Verblijfsobject, Afvalweging
+    Afvalcontainertype, AfvalLoopafstandAdres, Ligplaats, Nummeraanduiding,
+    OpenbareRuimte, Standplaats, Verblijfsobject, Afvalweging
 )
 
 __all__ = ['BijplaatsingenCsv', 'ContainersCsv', 'ContainertypesCsv',
-           'LoopafstandenCsv', 'NummeraanduidingenCsv', 'OpenbareRuimtesCsv',
-           'VerblijfsobjectenCsv', 'WegingenCsv']
+           'LigplaatsenCsv', 'LoopafstandenCsv', 'NummeraanduidingenCsv',
+           'OpenbareRuimtesCsv', 'StandplaatsenCsv', 'VerblijfsobjectenCsv',
+           'WegingenCsv']
 
 
 class BijplaatsingenCsv(CsvEndpoint[Afvalbijplaatsing]):
@@ -42,6 +43,23 @@ class ContainertypesCsv(CsvEndpoint[Afvalcontainertype]):
 #         'Zondag DuBez', 'Zondag EnkBez', 'RouteNr.dub', 'RouteNr.eb', 'Volume',
 #         'CapaciteitStats', 'FreqWeek afgeleid', 'LedigingenWeek',
 #     )
+
+
+class LigplaatsenCsv(CsvEndpoint[Ligplaats]):
+    url = 'https://api.data.amsterdam.nl/v1/bag/standplaatsen/'
+    model = Ligplaats
+    header = tuple(Ligplaats.__annotations__)[:-1]
+    # gebruiksdoel valt eraf in het CSV formaat. (Waarom?)
+
+    def row_parser(self) -> Callable[[list[str]], Model]:
+        """Returns a function that parses string tuples to model instances.
+        """
+        def parse_row(row: list[str]) -> Model:
+            # Leeg veld voor gebruiksdoel.
+            return parse(row + [''])
+
+        parse = super().row_parser()
+        return parse_row
 
 
 class LoopafstandenCsv(CsvEndpoint[AfvalLoopafstandAdres]):
@@ -85,6 +103,23 @@ class OpenbareRuimtesCsv(CsvEndpoint[OpenbareRuimte]):
 #         'Huisnr', 'Toev', 'Stadsdeel', 'Reintarcode', 'DDINGANG_OBJ',
 #         'DDINGANG_REL', 'Count of JJHEFFING',
 #     )
+
+
+class StandplaatsenCsv(CsvEndpoint[Standplaats]):
+    url = 'https://api.data.amsterdam.nl/v1/bag/standplaatsen/'
+    model = Standplaats
+    header = tuple(Standplaats.__annotations__)[:-1]
+    # gebruiksdoel valt eraf in het CSV formaat. (Waarom?)
+
+    def row_parser(self) -> Callable[[list[str]], Model]:
+        """Returns a function that parses string tuples to model instances.
+        """
+        def parse_row(row: list[str]) -> Model:
+            # Leeg veld voor gebruiksdoel.
+            return parse(row + [''])
+
+        parse = super().row_parser()
+        return parse_row
 
 
 class VerblijfsobjectenCsv(CsvEndpoint[Verblijfsobject]):

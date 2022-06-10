@@ -8,9 +8,9 @@ from aapi.models import (
     Model, Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie,
     Afvalcontainerlocatie, Afvalcontainer, Afvalcontainertype,
     AfvalvulgraadSidcon, Afvalweging, AfvalLoopafstandAdres,
-    AfvalLoopafstandBag, Nummeraanduiding, OpenbareRuimte, Verblijfsobject,
-    MeldingOpenbareRuimte, MeldingMijnAmsterdam, Buurt, Stadsdeel, Wijk,
-    Winkelgebied
+    AfvalLoopafstandBag, Ligplaats, Nummeraanduiding, OpenbareRuimte,
+    Standplaats, Verblijfsobject, MeldingOpenbareRuimte, MeldingMijnAmsterdam,
+    Buurt, Stadsdeel, Wijk, Winkelgebied
 )
 from aapi.session import make_session
 
@@ -76,6 +76,10 @@ class API:
         )
 
         # BAG
+        self.ligplaatsen = endpoint(
+            '/bag/ligplaatsen/',
+            Ligplaats
+        )
         self.nummeraanduidingen = endpoint(
             '/bag/nummeraanduidingen/',
             Nummeraanduiding
@@ -83,6 +87,10 @@ class API:
         self.openbare_ruimtes = endpoint(
             '/bag/openbareruimtes/',
             OpenbareRuimte
+        )
+        self.standplaatsen = endpoint(
+            '/bag/standplaatsen/',
+            Standplaats
         )
         self.verblijfsobjecten = endpoint(
             '/bag/verblijfsobjecten/',

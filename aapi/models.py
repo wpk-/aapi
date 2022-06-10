@@ -233,6 +233,25 @@ class Buurt(NamedTuple):
     id: str                                 # "03630980000006.1"
 
 
+class Ligplaats(NamedTuple):
+    registratiedatum: datetime              # "2022-06-08T13:18:54",
+    geconstateerd: bool                     # false,
+    statusCode: int                         # 1,
+    statusOmschrijving: str                 # "Plaats aangewezen",
+    heeftHoofdadresId: str                  # "0363200013028201",
+    geometrie: Multipolygon                 # {"type": "Polygon", ...},
+    beginGeldigheid: datetime               # "2022-06-08T00:00:00",
+    eindGeldigheid: datetime                # null,
+    documentdatum: date                     # "2022-06-08",
+    documentnummer: str                     # "SM00001773",
+    ligtInBuurtId: str                      # "03630980000356",
+    heeftDossierId: str                     # null,
+    bagprocesCode: int                      # 118,
+    bagprocesOmschrijving: str              # "Benoemen ligplaats",
+    id: str                                 # "0363020012500205.3",
+    gebruiksdoel: str                       # [{"omschrijving": "woonfunctie"}, ...]
+
+
 class MeldingMijnAmsterdam(NamedTuple):
     id: int                                 # 34054
     categorie: str                          # "overlast-bedrijven-en-horeca"
@@ -331,6 +350,25 @@ class Stadsdeel(NamedTuple):
     id: str                                 # "03630930000000.1"
 
 
+class Standplaats(NamedTuple):
+    registratiedatum: datetime              # "2022-04-01T14:14:09"
+    geconstateerd: bool                     # true
+    statusCode: int                         # 1
+    statusOmschrijving: str                 # "Plaats aangewezen"
+    heeftHoofdadresId: str                  # "0363200013025651"
+    geometrie: Multipolygon                 # {"type": "Polygon", ...}
+    beginGeldigheid: datetime               # "2022-04-01T00:00:00"
+    eindGeldigheid: datetime                # null
+    documentdatum: date                     # "2022-04-01"
+    documentnummer: str                     # "TM22030911_TM00TM"
+    ligtInBuurtId: str                      # "03630980000173"
+    heeftDossierId: str                     # "TM22030911"
+    bagprocesCode: int                      # 130
+    bagprocesOmschrijving: str              # "Constatering nieuw object"
+    id: str                                 # "0363030012500050.3"
+    gebruiksdoel: str                       # [{"omschrijving": "Woonfunctie"}, ...]
+
+
 class Verblijfsobject(NamedTuple):
     id: str                                 # "0363010000749418.9"
     registratiedatum: datetime              # "2022-04-26T15:57:06"
@@ -408,7 +446,8 @@ Model = TypeVar(
     'Model',
     Afvalbijplaatsing, Afvalcluster, Afvalclusterfractie, Afvalcontainer,
     Afvalcontainerlocatie, Afvalcontainertype, AfvalLoopafstandAdres,
-    AfvalLoopafstandBag, AfvalvulgraadSidcon, Afvalweging, Buurt,
+    AfvalLoopafstandBag, AfvalvulgraadSidcon, Afvalweging, Buurt, Ligplaats,
     MeldingMijnAmsterdam, MeldingOpenbareRuimte, Nummeraanduiding,
-    OpenbareRuimte, Stadsdeel, Verblijfsobject, Wijk, Winkelgebied,
+    OpenbareRuimte, Stadsdeel, Standplaats, Verblijfsobject, Wijk,
+    Winkelgebied,
 )
