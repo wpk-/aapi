@@ -8,7 +8,8 @@ from typing import Optional, Type, TypeVar
 
 from requests import Session
 
-from aapi.csv.parse import parse_bool, parse_float, parse_int, parse_point
+from aapi.csv.parse import parse_bool, parse_float, parse_int, parse_point, \
+    parse_multipolygon
 from aapi.models import Model, Multipolygon, Point
 from aapi.session import make_session
 
@@ -77,7 +78,7 @@ class CsvEndpoint(Iterable[Model]):
             str: str,
             time: optional(time.fromisoformat),
             Point: optional(parse_point),
-            Multipolygon: str,
+            Multipolygon: optional(parse_multipolygon),
         }
 
         model = self.model

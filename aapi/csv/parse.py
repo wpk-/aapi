@@ -1,4 +1,6 @@
-from aapi.models import Point
+import re
+
+from aapi.models import Point, Polygon, Multipolygon
 
 
 def parse_bool(s: str) -> bool:
@@ -21,3 +23,14 @@ def parse_point(s: str) -> Point:
         j = s.index(')', i)
         x, y = s[i:j].split()
         return round(float(x), 8), round(float(y), 8)
+
+
+def parse_multipolygon(s: str) -> Multipolygon:
+    # s = 'SRID=28992;POLYGON ((x0 y0, x1 y1, ...), ...)'
+    return [
+        [
+            Point(map(float, pair.split()))
+            for pair in poly[1:-1].split(', ')
+        ]
+        for poly in re.finditer(r'\([^(]+\)')
+    ]
