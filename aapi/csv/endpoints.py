@@ -46,7 +46,7 @@ class ContainertypesCsv(CsvEndpoint[Afvalcontainertype]):
 
 
 class LigplaatsenCsv(CsvEndpoint[Ligplaats]):
-    url = 'https://api.data.amsterdam.nl/v1/bag/standplaatsen/'
+    url = 'https://api.data.amsterdam.nl/v1/bag/ligplaatsen/'
     model = Ligplaats
     header = tuple(Ligplaats.__annotations__)[:-1]
     # gebruiksdoel valt eraf in het CSV formaat. (Waarom?)
