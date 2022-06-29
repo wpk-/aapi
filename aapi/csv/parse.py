@@ -21,7 +21,7 @@ def parse_point(s: str) -> Point:
         # s = 'SRID=28992;POINT (x y)'
         i = s.index('(') + 1
         j = s.index(')', i)
-        x, y = s[i:j].split()
+        x, y = s[i:j].split(',' if ',' in s[i:j] else None)
         return round(float(x), 8), round(float(y), 8)
 
 
