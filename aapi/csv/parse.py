@@ -32,5 +32,5 @@ def parse_multipolygon(s: str) -> Multipolygon:
             Point(map(float, pair.split()))
             for pair in poly[1:-1].split(', ')
         ]
-        for poly in re.finditer(r'\([^(]+\)')
+        for poly in re.findall(r'\([^(]+\)', s)
     ]
